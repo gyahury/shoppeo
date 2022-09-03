@@ -20,7 +20,7 @@
 	
 	<modules>
 		<module>ShoppeoBackEnd</module>
-		<module>ShoppeoFrontEnd</module>
+		<module>ShoppeoFrontEnd</module> 
 	</modules>
 	
 	<dependencies>
