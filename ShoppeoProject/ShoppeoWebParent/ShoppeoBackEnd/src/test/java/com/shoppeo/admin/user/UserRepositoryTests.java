@@ -58,4 +58,43 @@ public class UserRepositoryTests {
 		listUser.forEach(user -> System.out.println(user));
 	}
 	
+	@Test
+	public void testGetUserById() {
+		User userWang = repo.findById(2).get();
+		System.out.println(userWang);
+		assertThat(userWang).isNotNull();
+		
+	}
+	
+	@Test
+	public void testUpdateUserDetails() {
+		User userKyung = repo.findById(1).get();
+		userKyung.setEnabled(true);
+		userKyung.setEmail("ddddd@gmail.com");
+		
+		repo.save(userKyung);
+		
+	}
+	
+	@Test
+	public void testUpdateUserRole() {
+		User userWang = repo.findById(2).get();
+		Role roleEditor = new Role(3);
+		Role roleSalesperson = new Role(2);
+		
+		userWang.getRole().remove(roleEditor);
+		userWang.addRole(roleSalesperson);
+		
+		repo.save(userWang);
+		
+	}
+	
+	@Test
+	public void testDeleteUser() {
+		int userId = 2 ;
+		repo.deleteById(userId);
+		
+	}
+	
+	
 }

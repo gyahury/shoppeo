@@ -36,7 +36,7 @@ public class User {
 
 	@ManyToMany
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private Set<Role> role = new HashSet<>();
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -96,15 +96,22 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<Role> getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Set<Role> role) {
+		this.role = role;
 	}
 
 	public void addRole(Role role) {
-		this.roles.add(role);
+		this.role.add(role);
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", name=" + name + ", role=" + role + "]";
+	}
+	
+	
 }
