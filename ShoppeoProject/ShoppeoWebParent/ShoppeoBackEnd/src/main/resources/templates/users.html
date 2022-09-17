@@ -59,13 +59,37 @@
 		</nav>
 	</div>
 	<div>
-		<h2>회원정보</h2>
+		<h4>회원정보</h4>
+	</div>
+	<div>
+		<table class="table table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<th>아이디</th>
+					<th>이메일</th>
+					<th>이미지</th>
+					<th>이름</th>				
+					<th>권한</th>			
+					<th>사용 가능</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${listUsers}">
+					<td>[[${user.id}]]</td>
+					<td></td>
+					<td>[[${user.email}]]</td>
+					<td>[[${user.name}]]</td>
+					<td>[[${user.role}]]</td>
+					<td>[[${user.enabled}]]</td>
+					<td>Edit &nbsp;Delete</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<div>
 		<p>Shoppeo 관리자 페이지 - Copyright &copy; Shoppeo</p>
 	</div> 
 	
 </div>
-	
 </body>
 </html>
