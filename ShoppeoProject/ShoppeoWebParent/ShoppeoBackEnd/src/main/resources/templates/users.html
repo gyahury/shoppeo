@@ -43,16 +43,16 @@
 						<a class="nav-link" th:href="@{/orders}">주문</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/report}">Sales Report</a>
+						<a class="nav-link" th:href="@{/report}">통계</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/articles}">Articles</a>
+						<a class="nav-link" th:href="@{/articles}">기사</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/menus}">Menus</a>
+						<a class="nav-link" th:href="@{/menus}">메뉴</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/settings}">Settings</a>
+						<a class="nav-link" th:href="@{/settings}">옵션</a>
 					</li>
 				</ul>
 			</div>
@@ -61,6 +61,9 @@
 	<div>
 		<h4>회원 관리</h4>
 		<a th:href="@{/users/new}">회원 생성하기</a>
+	</div>
+	<div th:if="${success_message != null}" class="alert alert-success text-center">
+	[[${success_message}]]
 	</div>
 	<div>
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -71,7 +74,7 @@
 					<th>프로필 사진</th>
 					<th>이름</th>				
 					<th>권한</th>			
-					<th>사용 가능</th>
+					<th>상태</th>
 					<th></th>
 				</tr>
 			</thead>

@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.shoppeo.common.entity.Role;
+import com.shoppeo.common.entity.User;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -37,5 +38,14 @@ public class RoleRepositoryTests {
 		Role roleAssistant = new Role("Assistant","문의, 리뷰 관리");
 		
 		repo.saveAll(List.of(roleSalesperson,roleEditor,roleShipper,roleAssistant));
+	}
+	
+	@Test
+	public void testUpdateRoleDetails() {
+		Role adminRole = repo.findById(1).get();
+		adminRole.setDescription("전체 관리");
+		
+		repo.save(adminRole);
+		
 	}
 }
