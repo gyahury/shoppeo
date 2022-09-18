@@ -60,24 +60,26 @@
 	</div>
 	<div>
 		<h4>회원정보</h4>
+		<a th:href="@{/users/new}">회원 생성하기</a>
 	</div>
 	<div>
-		<table class="table table-responsive-xl">
+		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
 					<th>아이디</th>
 					<th>이메일</th>
-					<th>이미지</th>
+					<th>프로필 사진</th>
 					<th>이름</th>				
 					<th>권한</th>			
 					<th>사용 가능</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user : ${listUsers}">
 					<td>[[${user.id}]]</td>
-					<td></td>
 					<td>[[${user.email}]]</td>
+					<td></td>
 					<td>[[${user.name}]]</td>
 					<td>[[${user.role}]]</td>
 					<td>[[${user.enabled}]]</td>
@@ -87,7 +89,7 @@
 		</table>
 	</div>
 	<div>
-		<p>Shoppeo 관리자 페이지 - Copyright &copy; Shoppeo</p>
+		<p class="text-center">Shoppeo 관리자 페이지 - Copyright &copy; Shoppeo</p>
 	</div> 
 	
 </div>
