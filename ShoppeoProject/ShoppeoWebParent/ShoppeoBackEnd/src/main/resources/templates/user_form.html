@@ -60,7 +60,7 @@
 	</div>
 	<div>
 		<h4>회원 관리 - 신규 회원 생성</h4>
-		<form th:action="@{/users/save}" method="post" style="max-width:700px; margin:0 auto;" th:object="${user}">
+		<form th:action="@{/users/save}" method="post" style="max-width:700px; margin:0 auto;" th:object="${user}" onsubmit="return checkEmailUnique(this)">
 			<div style="box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 12px 17px 2px rgba(0,0,0,.14),0 5px 22px 4px rgba(0,0,0,.12)!important;padding:80px; border-radius:13px;">
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label">이메일</label>
@@ -124,6 +124,18 @@
 			window.location = "[[@{/users}]]";
 		});
 	});
+	
+	function checkEmailUnique(form){
+		url = "[[@{/users/check_email}]]";
+		userEmail = $("#email").val();
+		csrfValue = $("input[name='_csrf']").val();
+		params = { email : userEmail , _csrf : csrfValue};
+		//ajax
+		$.post(url, params, function(response){
+			alert("서버 응답 : "+response);
+		});
+		return false;
+	}
 </script>
 </body>
 </html>
