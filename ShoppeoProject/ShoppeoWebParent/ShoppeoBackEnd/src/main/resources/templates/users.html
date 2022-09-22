@@ -6,6 +6,9 @@
 <title>Shoppeo 관리자 페이지</title>
 
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
@@ -69,24 +72,25 @@
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
-					<th>아이디</th>
-					<th>이메일</th>
-					<th>프로필 사진</th>
-					<th>이름</th>				
-					<th>권한</th>			
-					<th>상태</th>
-					<th></th>
+					<th class="text-center align-middle">번호</th>
+					<th class="align-middle">이메일</th>
+					<th class="text-center align-middle">프로필 사진</th>
+					<th class="align-middle">이름</th>				
+					<th class="align-middle">권한</th>			
+					<th class="text-center align-middle">상태</th>
+					<th class="align-middle"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user : ${listUsers}">
-					<td>[[${user.id}]]</td>
-					<td>[[${user.email}]]</td>
-					<td></td>
-					<td>[[${user.name}]]</td>
-					<td>[[${user.role}]]</td>
-					<td>[[${user.enabled}]]</td>
-					<td>Edit &nbsp;Delete</td>
+					<td class="text-center align-middle">[[${user.id}]]</td>
+					<td class="align-middle">[[${user.email}]]</td>
+					<td class="text-center align-middle"><i class="fa-regular fa-image fa-2x icon-dark"></i></td>
+					<td class="align-middle">[[${user.name}]]</td>
+					<td class="align-middle">[[${user.role}]]</td>
+					<td th:if="${user.enabled==true}" class="text-center align-middle"><i class="fa-solid fa-square-check"></i></td>
+					<td th:if="${user.enabled!=true}" class="text-center align-middle"><i class="fa-solid fa-square-check icon-dark"></i></td>
+					<td class="text-center align-middle"><span class="fa-solid fa-file-pen text-decoration-none" href=""></span> &nbsp;&nbsp;<span class="fa-solid fa-minus icon-red text-decoration-none" href=""></span></td>
 				</tr>
 			</tbody>
 		</table>

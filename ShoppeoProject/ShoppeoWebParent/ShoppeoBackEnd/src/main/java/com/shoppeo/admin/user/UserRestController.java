@@ -12,7 +12,7 @@ public class UserRestController {
 	
 	@PostMapping("/users/check_email")
 	public String checkDuplicateEmail(@Param("email") String email) {
-		return service.isEmailUnique(email) ? "사용 가능한 이메일입니다." : "중복된 이메일입니다.";
+		return service.isEmailUnique(email) ? "OK" : "Duplicated";
 	}
 	
 

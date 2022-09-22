@@ -109,8 +109,27 @@
 						<input type="button" value="취소" class="btn btn-secondary" id="buttonCancel"/>
 					</div>
 			</div>
-		
 		</form>
+		
+		<div class="modal fade text-center" id="modalDialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalTitle"></h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					
+					<div class="modal-body">
+						<span id="modalBody"></span>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	
 	<div>
@@ -130,11 +149,30 @@
 		userEmail = $("#email").val();
 		csrfValue = $("input[name='_csrf']").val();
 		params = { email : userEmail , _csrf : csrfValue};
+		
 		//ajax
 		$.post(url, params, function(response){
-			alert("서버 응답 : "+response);
-		});
+			if(response=="OK"){
+				form.submit();
+			}
+			else if(response == "Duplicated"){
+				showModalDialog("알림", "이미 존재하는 이메일입니다.");
+			}	
+			else {
+				showModalDialog("에러", "잠시 후에 다시 시도해주세요.");
+			}
+			}).fail(function(){
+				showModalDialog("에러", "서버와의 연결이 실패하였습니다");
+			});
+		
+		
 		return false;
+	}
+	
+	function showModalDialog(title, message){
+		$("#modalTitle").text(title);
+		$("#modalBody").text(message);
+		$("#modalDialog").modal();
 	}
 </script>
 </body>
