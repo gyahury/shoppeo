@@ -3,3 +3,7 @@
 *.icon-green {color : green}
 *.icon-dark {color : grey}
 *.icon-red {color : red}
+td a:hover{
+	color : grey !important;
+	opacity : 0.8;
+}

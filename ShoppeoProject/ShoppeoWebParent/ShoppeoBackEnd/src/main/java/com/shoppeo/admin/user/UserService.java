@@ -1,6 +1,7 @@
 package com.shoppeo.admin.user;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,6 +44,14 @@ public class UserService {
 		User userByEmail = userRepo.getUserByEmail(email);
 		
 		return userByEmail == null;
+	}
+
+	public User get(int id) throws UserNotFoundException {
+		try {
+		return userRepo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new UserNotFoundException("사용자를 찾을 수 없습니다.");
+		}
 	}
 	}
 

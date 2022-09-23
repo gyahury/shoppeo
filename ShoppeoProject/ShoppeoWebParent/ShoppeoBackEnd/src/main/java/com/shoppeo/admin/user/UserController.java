@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,6 +44,20 @@ public class UserController {
 		
 		redirectAttributes.addFlashAttribute("success_message", "회원 생성에 성공하였습니다.");
 		return "redirect:/users";
+	}
+	
+	@GetMapping("/users/edit/{id}")
+	public String editUser(@PathVariable(name="id") int id, RedirectAttributes redirectAttributes, Model model) {
+		try {
+		User user = service.get(id);
+		model.addAttribute("user",user);
+		
+		return "user_form";
+		} catch (UserNotFoundException ex) {
+			redirectAttributes.addFlashAttribute("message", ex.getMessage());
+			return "redirect:/users";
+		}
+		
 	}
 	
 	
