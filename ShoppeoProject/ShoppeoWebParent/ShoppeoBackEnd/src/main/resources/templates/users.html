@@ -68,6 +68,9 @@
 	<div th:if="${success_message != null}" class="alert alert-success text-center">
 	[[${success_message}]]
 	</div>
+	<div th:if="${not_found_message != null}" class="alert alert-danger text-center">
+	[[${not_found_message}]]
+	</div>
 	<div>
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">

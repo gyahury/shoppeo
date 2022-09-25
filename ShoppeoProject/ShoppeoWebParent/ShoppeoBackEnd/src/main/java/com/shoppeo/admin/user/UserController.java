@@ -34,6 +34,7 @@ public class UserController {
 		user.setEnabled(true);
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
+		model.addAttribute("pageTitle", "신규 회원 생성");
 		return "user_form";
 	}
 	
@@ -47,14 +48,18 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/edit/{id}")
-	public String editUser(@PathVariable(name="id") int id, RedirectAttributes redirectAttributes, Model model) {
+	public String editUser(@PathVariable(name="id") Integer id, RedirectAttributes redirectAttributes, Model model) {
 		try {
 		User user = service.get(id);
+		List<Role> listRoles = service.listRoles();
+		
 		model.addAttribute("user",user);
+		model.addAttribute("listRoles", listRoles);
+		model.addAttribute("pageTitle", "회원 정보 수정");
 		
 		return "user_form";
 		} catch (UserNotFoundException ex) {
-			redirectAttributes.addFlashAttribute("message", ex.getMessage());
+			redirectAttributes.addFlashAttribute("not_found_message", ex.getMessage());
 			return "redirect:/users";
 		}
 		
