@@ -93,7 +93,7 @@
 					<td class="align-middle">[[${user.role}]]</td>
 					<td th:if="${user.enabled==true}" class="text-center align-middle"><i class="fa-solid fa-square-check"></i></td>
 					<td th:if="${user.enabled!=true}" class="text-center align-middle"><i class="fa-solid fa-square-check icon-dark"></i></td>
-					<td class="text-center align-middle"><a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}"></a> &nbsp;&nbsp;<a class="fa-solid fa-minus text-decoration-none icon-dark" th:href="@{'/users/delete/'+${user.id}}"></a></td>
+					<td class="text-center align-middle"><a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}"></a> &nbsp;&nbsp;<a class="fa-solid fa-minus text-decoration-none icon-dark link-delete" th:href="@{'/users/delete/'+${user.id}}" title="Delete this user"></a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -75,5 +75,15 @@ public class UserService {
 			throw new UserNotFoundException("사용자를 찾을 수 없습니다.");
 		}
 	}
+	
+	public void delete(Integer id) throws UserNotFoundException {
+		Long countById = userRepo.countById(id);
+		if(countById == null || countById == 0) {
+			throw new UserNotFoundException("사용자를 찾을 수 없습니다.");
+		}
+		
+		userRepo.deleteById(id);
+		
+	}
 	}
 
