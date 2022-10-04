@@ -91,8 +91,12 @@
 					<td class="text-center align-middle"><i class="fa-regular fa-image fa-2x icon-dark"></i></td>
 					<td class="align-middle">[[${user.name}]]</td>
 					<td class="align-middle">[[${user.role}]]</td>
-					<td th:if="${user.enabled==true}" class="text-center align-middle"><i class="fa-solid fa-square-check"></i></td>
-					<td th:if="${user.enabled!=true}" class="text-center align-middle"><i class="fa-solid fa-square-check icon-dark"></i></td>
+					<td th:if="${user.enabled==true}" class="text-center align-middle"><a class="fa-solid fa-square-check"
+						th:href="@{'/users/'+ ${user.id} + '/enabled/false'}"
+						title="비활성화하기"></a></td>
+					<td th:if="${user.enabled==false}" class="text-center align-middle"><a class="fa-solid fa-square-check icon-dark"
+						th:href="@{'/users/'+ ${user.id} + '/enabled/true'}"
+						title="활성화하기"></a></td>
 					<td class="text-center align-middle"><a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}"></a> &nbsp;&nbsp;<a class="fa-solid fa-minus text-decoration-none icon-dark link-delete" th:href="@{'/users/delete/'+${user.id}}" title="Delete this user"></a></td>
 				</tr>
 			</tbody>
@@ -128,10 +132,10 @@
 		$(".link-delete").on("click", function(e){
 			e.preventDefault();
 			link= $(this);
-			
+			alert($(this).attr("href"));
 			$("#yesButton").attr("href",link.attr("href"));
 			$("#confirmModal").modal();
-//			alert($(this).attr("href"));
+			
 		});
 	});
 </script>
