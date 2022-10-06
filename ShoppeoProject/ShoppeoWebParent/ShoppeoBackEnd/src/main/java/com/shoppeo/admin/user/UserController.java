@@ -1,15 +1,20 @@
 package com.shoppeo.admin.user;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shoppeo.admin.FileUploadUtil;
 import com.shoppeo.common.entity.Role;
 import com.shoppeo.common.entity.User;
 
@@ -39,11 +44,18 @@ public class UserController {
 	}
 	
 	@PostMapping("/users/save")
-	public String saveUser(User user, RedirectAttributes redirectAttributes) {
+	public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 		System.out.println(user);
-		service.save(user);
+		System.out.println("확인"+multipartFile.getOriginalFilename());
 		
-		redirectAttributes.addFlashAttribute("success_message", "회원 생성에 성공하였습니다.");
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		
+		String uploadDir = "user-photos";
+		
+		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		//service.save(user);
+		
+		//redirectAttributes.addFlashAttribute("success_message", "회원 생성에 성공하였습니다.");
 		return "redirect:/users";
 	}
 	
