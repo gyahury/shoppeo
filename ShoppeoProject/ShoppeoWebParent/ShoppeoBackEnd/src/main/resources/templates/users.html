@@ -88,7 +88,11 @@
 				<tr th:each="user : ${listUsers}">
 					<td class="text-center align-middle">[[${user.id}]]</td>
 					<td class="align-middle">[[${user.email}]]</td>
-					<td class="text-center align-middle"><i class="fa-regular fa-image fa-2x icon-dark"></i></td>
+					<td class="text-center align-middle">
+						<i th:if="${user.photos == null}" class="fa-regular fa-image fa-2x icon-dark"></i>
+						<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style= "width: 100px; border-radius:10px" />
+						</td>
+					
 					<td class="align-middle">[[${user.name}]]</td>
 					<td class="align-middle">[[${user.role}]]</td>
 					<td th:if="${user.enabled==true}" class="text-center align-middle"><a class="fa-solid fa-square-check"
