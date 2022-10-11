@@ -47,9 +47,16 @@ public class UserController {
 	public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 //		System.out.println(user);
 //		System.out.println("확인"+multipartFile.getOriginalFilename());
+		String message = "";
+		boolean isUpdatingUser = (user.getId() != null);
+		if(isUpdatingUser){
+			message ="회원 수정에 성공하였습니다.";
+		}else {
+			message ="회원 생성에 성공하였습니다.";
+		}
 		
-		if(!multipartFile.isEmpty()) {   // 사진파일이 비워져있지 않다면
-			
+		
+		if(!multipartFile.isEmpty()) {   // 사진파일이 비워져있지 않다면 ( 이미 존재하는 계정 )
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			user.setPhotos(fileName);
 			User saveduser = service.save(user);
@@ -60,14 +67,12 @@ public class UserController {
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			
 		} else {
-			// 사진을 넣지 않은 경우 
+			// 사진을 넣지 않은 경우 ( 가입할 때부터 사진이 없거나, 신규 )
 			if(user.getPhotos().isEmpty()) user.setPhotos(null);
 			service.save(user);
 		}
 		
-		
-		
-		redirectAttributes.addFlashAttribute("success_message", "회원 생성에 성공하였습니다.");
+		redirectAttributes.addFlashAttribute("success_message", message);
 		return "redirect:/users";
 	}
 	

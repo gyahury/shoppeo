@@ -59,7 +59,7 @@
 		</nav>
 	</div>
 	<div>
-		
+		<br>
 		<form th:action="@{/users/save}" method="post" style="max-width:700px; margin:0 auto;" th:object="${user}" onsubmit="return checkEmailUnique(this)" enctype="multipart/form-data">
 			<!--  <h4>회원 관리 - [[${pageTitle}]]</h4>-->
 			<input type="hidden" th:field="*{id}"/>

@@ -136,7 +136,6 @@
 		$(".link-delete").on("click", function(e){
 			e.preventDefault();
 			link= $(this);
-			alert($(this).attr("href"));
 			$("#yesButton").attr("href",link.attr("href"));
 			$("#confirmModal").modal();
 			
