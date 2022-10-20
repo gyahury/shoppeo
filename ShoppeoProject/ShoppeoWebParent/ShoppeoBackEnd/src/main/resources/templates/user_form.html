@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
-<title>신규 회원 생성 페이지</title>
+<title>[[${pageTitle}]]</title>
 
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -118,7 +118,7 @@
 				
 				
 				<div class="text-center">
-						<input type="submit" value="생성" class="btn btn-primary m-3" style="font-size: 0.85rem;"/>
+						<input type="submit" th:value=${clickLabel} class="btn btn-primary m-3" style="font-size: 0.85rem;"/>
 						<input type="button" value="취소" class="btn btn-secondary" id="buttonCancel" style="font-size: 0.85rem;"/>
 					</div>
 			</div>

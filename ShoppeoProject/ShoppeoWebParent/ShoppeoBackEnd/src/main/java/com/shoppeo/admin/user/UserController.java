@@ -75,10 +75,13 @@ public class UserController {
 	public String newUser(Model model) {
 		List<Role> listRoles = service.listRoles();
 		User user = new User();
-		user.setEnabled(true);
+ 		user.setEnabled(true);
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
-		model.addAttribute("pageTitle", "신규 회원 생성");
+		
+		model.addAttribute("pageTitle", "회원 생성 페이지");
+		model.addAttribute("clickLabel", "생성");
+		
 		return "user_form";
 	}
 	
@@ -123,7 +126,8 @@ public class UserController {
 		
 		model.addAttribute("user",user);
 		model.addAttribute("listRoles", listRoles);
-		model.addAttribute("pageTitle", "회원 정보 수정");
+		model.addAttribute("pageTitle", "회원 수정 페이지");
+		model.addAttribute("clickLabel", "수정");
 		
 		return "user_form";
 		} catch (UserNotFoundException ex) {
