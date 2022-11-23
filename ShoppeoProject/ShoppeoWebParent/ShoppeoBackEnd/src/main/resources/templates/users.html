@@ -69,13 +69,10 @@
 	</div>
 	<div>
 		<h4 class="mt-3 ml-2">회원 관리</h4>
-		<a th:href="@{/users/new}" class="ml-2">회원 생성하기</a>
-		&nbsp; | &nbsp;
-		<a th:href="@{/users/export/csv}">CSV로 내려받기</a>
-		&nbsp; | &nbsp;
-		<a th:href="@{/users/export/excel}">엑셀로 내려받기</a>
-		&nbsp; | &nbsp;
-		<a th:href="@{/users/export/pdf}">PDF로 내려받기</a>
+		<a th:href="@{/users/new}" class="fas fa-user-plus mr-3 ml-2" style="text-decoration:none;"></a>
+		<a th:href="@{/users/export/csv}" class="fas fa-file-csv mr-3"></a>
+		<a th:href="@{/users/export/excel}" class="fas fa-file-excel mr-3"></a>
+		<a th:href="@{/users/export/pdf}" class="fas fa-file-pdf mr-3"></a>
 	</div>
 	
 	<div>
@@ -83,7 +80,7 @@
 			<input type="hidden" name="sortField" th:value="${sortField}"/>
 			<input type="hidden" name="sortDir" th:value="${sortDir}"/>
 		
-			<input type="search" name="keyword" th:value="${keyword}" class="form-control" style="font-size:12px" required/>
+			<input type="search" name="keyword" th:value="${keyword}" class="form-control" style="font-size:12px; width:auto;" required/>
 			 &nbsp;&nbsp;
 			 <input type="submit" value="검색" class="btn btn-primary" style="font-size:12px"/> &nbsp;
 			 <input type="button" value="초기화" class="btn btn-secondary" style="font-size:12px" onclick="clearFilter()"/>
@@ -91,27 +88,31 @@
 		
 	</div>
 	
-	<div>
+	<div class="full-details">
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
-					<th th:replace="fragments :: column_link('id', 'ID')" />
-					<th th:replace="fragments :: column_link('email', '이메일')" />
+					<th class="hideable-column">
+						<th th:replace="fragments :: column_link('id', 'ID', 'tag')" />
+					</th>
+					<th class="hideable-column">
+					<th th:replace="fragments :: column_link('email', '이메일', 'tag')" />
+					</th>
 					<th class="text-center align-middle">프로필 사진</th>
-					<th th:replace="fragments :: column_link('name', '이름')" />		
+					<th th:replace="fragments :: column_link('name', '이름', 'none')" />		
 					<th class="align-middle">권한</th>			
-					<th th:replace="fragments :: column_link('enabled', '상태')" />		
+					<th th:replace="fragments :: column_link('enabled', '상태', 'none')" />		
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user : ${listUsers}">
-					<td class="text-center align-middle">[[${user.id}]]</td>
-					<td class="align-middle">[[${user.email}]]</td>
+					<td class="text-center align-middle hideable-column">[[${user.id}]]</td>
+					<td class="align-middle hideable-column">[[${user.email}]]</td>
 					<td class="text-center align-middle">
 						<i th:if="${user.photos == null}" class="fa-regular fa-image fa-2x icon-dark"></i>
 						<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style= "width: 100px; border-radius:10px" />
-						</td>
+					</td>
 					
 					<td class="align-middle">[[${user.name}]]</td>
 					<td class="align-middle">[[${user.role}]]</td>
@@ -121,10 +122,42 @@
 					<td th:if="${user.enabled==false}" class="text-center align-middle"><a class="fa-solid fa-square-check icon-dark"
 						th:href="@{'/users/'+ ${user.id} + '/enabled/true'}"
 						title="활성화하기"></a></td>
-					<td class="text-center align-middle"><a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}" title="회원 수정"></a> &nbsp;&nbsp;<a class="fa-solid fa-minus text-decoration-none icon-dark link-delete" th:href="@{'/users/delete/'+${user.id}}" title="회원 삭제"></a></td>
+					<td class="text-center align-middle">
+					<a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}" title="회원 수정"></a> 
+					&nbsp;&nbsp;
+					<a class="fa-solid fa-minus text-decoration-none icon-dark link-delete" th:href="@{'/users/delete/'+${user.id}}" title="회원 삭제"></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	
+	<div class="less-details">
+		<div th:each="user : ${listUsers}" class="row">
+			<div class="col-4">
+				<i th:if="${user.photos == null}" class="fa-regular fa-image fa-2x icon-dark"></i>
+				<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style= "width: 100px; border-radius:10px" />
+			</div>
+			<div class="col-8">
+				<div>[[${user.name}]]</div>
+				<div>[[${user.role}]]</div>
+				
+				<div class="mt-1">
+					<span th:if="${user.enabled==true}" class="text-center align-middle"><a class="fa-solid fa-square-check"
+					th:href="@{'/users/'+ ${user.id} + '/enabled/false'}"
+					title="비활성화하기"></a>
+					</span>
+					<span th:if="${user.enabled==false}" class="text-center align-middle"><a class="fa-solid fa-square-check icon-dark"
+							th:href="@{'/users/'+ ${user.id} + '/enabled/true'}"
+							title="활성화하기"></a>
+					</span>
+					&nbsp;
+					<a class="fa-solid fa-file-pen text-decoration-none icon-dark" th:href="@{'/users/edit/'+${user.id}}" title="회원 수정"></a> 
+					&nbsp;
+					<a class="fa-solid fa-minus text-decoration-none icon-dark link-delete" th:href="@{'/users/delete/'+${user.id}}" title="회원 삭제"></a>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div class="text-center m-1" th:unless = "${totalItems > 0}">
@@ -133,7 +166,7 @@
 	
 	<div th:if="${totalPages > 1}">
 		<nav>
-			 <ul class="pagination justify-content-center">					
+			 <ul class="pagination justify-content-center flex-wrap">					
 			 		<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
 			 			<a th:replace="fragments :: pagnation_link('1', '처음')" />
 				    </li>

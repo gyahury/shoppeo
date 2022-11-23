@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<th th:fragment="column_link(fieldName, columnLabel)" class="text-center align-middle">
+	<th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}" class="text-center align-middle">
 		<a class="text-white" style="text-decoration : none;"
 		th:href="@{'/users/page/1?sortField=' + ${fieldName} + '&sortDir='+${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword='+ keyword : ''}}">
 		[[${columnLabel}]]
